@@ -36,7 +36,7 @@ def enter(entered_password, password):
         login_win.destroy()
         continue_to_main = True
     else:
-        messagebox.showerror('Prijava', 'Vnesli ste napačno geslo!')
+        messagebox.showerror('Login', 'You entered the wrong password!')
 
 def set_password(password1, password2):
     global continue_to_main, login_win
@@ -48,28 +48,28 @@ def set_password(password1, password2):
         login_win.destroy()
         continue_to_main = True
     else:
-        messagebox.showerror('Prijava', 'Gesli se ne ujemata!')
+        messagebox.showerror('Login', 'Passwords do not match!')
 
 def login():
     global login_win, password_entry, enter_button, password_entry2, no_password_label, password_label
     login_win = Tk()
-    login_win.title('Prijava-PasswordSaver')
+    login_win.title('Login-Password Manager')
     login_win.geometry('300x180')
     login_win.iconbitmap(icon_path)
     login_win.resizable(False, False)
 
     if PASSWORD_SET == True:
-        password_label = Label(login_win, text='Vnesite geslo spodaj.')
+        password_label = Label(login_win, text='Enter the password below.')
         password_label.pack(pady=10)
 
         password_entry = Entry(login_win, width=30, show='*')
         password_entry.pack(pady=30)
         
-        enter_button = Button(login_win, text='VZTOPI', command=lambda:enter(password_entry.get(), app_password))
+        enter_button = Button(login_win, text='ENTER', command=lambda:enter(password_entry.get(), app_password))
         enter_button.pack()
     else:
         login_win.geometry('300x180')
-        no_password_label = Label(login_win, text='Nimate še nastavljenega gesla.\nProsimo nastavite ga spodaj.')
+        no_password_label = Label(login_win, text='You do not have a password.\nPlease set it.')
         no_password_label.pack(pady=10)
 
         password_entry = Entry(login_win, width=30, show='')
@@ -78,7 +78,7 @@ def login():
         password_entry2 = Entry(login_win, width=30, show='*')
         password_entry2.pack(pady=15)
         
-        enter_button = Button(login_win, text='NASTAVI IN VZTOPI', command=lambda:set_password(password_entry.get(), password_entry2.get()))
+        enter_button = Button(login_win, text='SET AND ENTER', command=lambda:set_password(password_entry.get(), password_entry2.get()))
         enter_button.pack()
 
     login_win.mainloop()
@@ -88,7 +88,7 @@ def login():
 login()
 if continue_to_main == True:
     win = Tk()
-    win.title('PasswordSaver')
+    win.title('Password Manager')
     win.geometry('1000x500')
     win.state('zoomed')
     win.iconbitmap(icon_path)
@@ -130,7 +130,7 @@ if continue_to_main == True:
             self.DataFrame = Frame(seccond_frame, highlightbackground='black', highlightthickness=2)
             self.DataFrame.grid(row=int(self.label_n), column=1, pady=5)
 
-            self.data_label = Label(self.DataFrame, text=f'Stran: {self.web_page}    Uporabniško ime: {self.username}    Geslo: {self.shown_password}', font=('Arial', 15))
+            self.data_label = Label(self.DataFrame, text=f'Page: {self.web_page}    Username: {self.username}    Password: {self.shown_password}', font=('Arial', 15))
             self.data_label.grid(row=0, column=1, padx=5)
 
             self.destroy_button = Button(self.DataFrame, image=remove_image_path, borderwidth=0, command=lambda:self.destroy())
@@ -143,14 +143,14 @@ if continue_to_main == True:
             if self.password_is_shown == False:
                 self.shown_password = self.password
 
-                self.data_label['text'] = text=f'Stran: {self.web_page}    Uporabniško ime: {self.username}    Geslo: {self.shown_password}'
+                self.data_label['text'] = text=f'Page: {self.web_page}    Username: {self.username}    Password: {self.shown_password}'
                 self.show_hide_button['image'] = image=hide_image_path
 
                 self.password_is_shown = True
             else:
                 self.shown_password = str('*'*int(len(self.password)))
 
-                self.data_label['text'] = text=f'Stran: {self.web_page}    Uporabniško ime: {self.username}    Geslo: {self.shown_password}'
+                self.data_label['text'] = text=f'Page: {self.web_page}    Username: {self.username}    Password: {self.shown_password}'
                 self.show_hide_button['image'] = image=show_image_path
 
                 self.password_is_shown = False
@@ -178,21 +178,21 @@ if continue_to_main == True:
     def add_data():
         global data, win2, labels, label_n
         win2 = Tk()
-        win2.title('Dodaj podatke')
+        win2.title('Add data')
         win2.geometry('500x500')
         win2.resizable(False, False)
 
-        StranLabel = Label(win2, text='Stran:  ', font=('Arial', 12, 'bold'))
+        StranLabel = Label(win2, text='Page:  ', font=('Arial', 12, 'bold'))
         StranLabel.grid(row=0, column=1, pady=5)
         StranEntry = Entry(win2, width=100, font=('Arial', 12))
         StranEntry.grid(row=0, column=2, pady=5)
 
-        UporabniskoImeLabel = Label(win2, text='Uporabniško ime:  ', font=('Arial', 12, 'bold'))
+        UporabniskoImeLabel = Label(win2, text='Username:  ', font=('Arial', 12, 'bold'))
         UporabniskoImeLabel.grid(row=1, column=1)
         UporabniskoImeEntry = Entry(win2, width=100, font=('Arial', 12))
         UporabniskoImeEntry.grid(row=1, column=2)
 
-        GesloLabel = Label(win2, text='Geslo:  ', font=('Arial', 12, 'bold'))
+        GesloLabel = Label(win2, text='Password:  ', font=('Arial', 12, 'bold'))
         GesloLabel.grid(row=2, column=1, pady=5)
         GesloEntry = Entry(win2, width=100, font=('Arial', 12))
         GesloEntry.grid(row=2, column=2, pady=5)
@@ -215,7 +215,7 @@ if continue_to_main == True:
 
             win2.destroy()
 
-        ApplyButton = Button(win2, text='POTRDI', bg='lightgreen', fg='black', command=apply)
+        ApplyButton = Button(win2, text='APPLY', bg='lightgreen', fg='black', command=apply)
         ApplyButton.grid(row=3, column=1, pady=40)
 
 
